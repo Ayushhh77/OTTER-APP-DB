@@ -8,8 +8,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('send-otp')
-  async sendOtp(@Body() sendOtpDto: SendOtpDto): Promise<void> {
+  async sendOtp(@Body() sendOtpDto: SendOtpDto): Promise<{ message: string }> {
     await this.authService.sendOtp(sendOtpDto.phoneNumber);
+    return { message: 'OTP has been ent sucessfully to your phone number' };
   }
 
   @Post('verify-otp')

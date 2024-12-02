@@ -6,13 +6,15 @@ import { AuthController } from '../auth/auth.controller';
 import { User } from '../auth/entities/user.entity';
 import { OTP } from './entities/otp.entity';
 import { SmsModule } from '../sms/sms.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forFeature([User, OTP]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '90d' },
     }),
     SmsModule,
   ],

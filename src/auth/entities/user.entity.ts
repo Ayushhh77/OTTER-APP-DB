@@ -6,20 +6,20 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('users') // Table name explicitly defined as 'users'
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ unique: true })
-  phoneNumber: string; // Store the user's phone number, unique to prevent duplicates
+  phoneNumber: string;
 
   @Column({ default: false })
-  is_verified: boolean; // Indicates if the user has verified their phone number
+  isVerified: boolean;
 
-  @CreateDateColumn({ name: 'created_at' }) // Column name for better readability in DB
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' }) // Column name for better readability in DB
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }

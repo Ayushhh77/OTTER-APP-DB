@@ -3,8 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/auth/entities/user.entity';
 import { Invitation } from './entities/invitation.entity';
-import { Profile } from 'src/profile/entities/profile.entity'; // Import Profile entity
-
+import { Profile } from 'src/profile/entities/profile.entity';
 @Injectable()
 export class InvitationService {
   constructor(
@@ -15,7 +14,7 @@ export class InvitationService {
     private readonly userRepository: Repository<User>,
 
     @InjectRepository(Profile)
-    private readonly profileRepository: Repository<Profile>, // Inject Profile repository
+    private readonly profileRepository: Repository<Profile>,
   ) {}
 
   // Check if a user exists by phone number
@@ -23,7 +22,7 @@ export class InvitationService {
     const user = await this.userRepository.findOne({
       where: { phoneNumber },
     });
-    return user || null; // Return null if user is not found
+    return user || null;
   }
 
   // Send an invitation to a user
@@ -39,7 +38,7 @@ export class InvitationService {
       throw new HttpException('Sender not found', HttpStatus.NOT_FOUND);
     }
 
-    // Fetch the sender's profile (optional if you need full name)
+    // Fetch the sender's profile
     const senderProfile = await this.profileRepository.findOne({
       where: { user: { id: userId } },
     });

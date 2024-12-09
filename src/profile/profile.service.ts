@@ -4,7 +4,7 @@ import { Profile } from './entities/profile.entity';
 import { Repository } from 'typeorm';
 import { User } from 'src/auth/entities/user.entity';
 import { CreateProfileDto } from './dto/create-profile.dto';
-import { InvitationService } from 'src/invitation/invitation.service'; // Import the InvitationService
+import { InvitationService } from 'src/invitation/invitation.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 
 @Injectable()
@@ -67,9 +67,8 @@ export class ProfileService {
     }
 
     if (profileData.partnerPhoneNumber && partner) {
-      profile.invitePartner = true; // Set this to true if partner is found
+      profile.invitePartner = true;
     } else {
-      // If partner is not found, give the user a share link to invite them
       profile.invitePartner = false;
     }
 
@@ -101,7 +100,6 @@ export class ProfileService {
     @Req() req,
     profileData: UpdateProfileDto,
   ): Promise<Profile> {
-    // Fetch the user's profile
     const profile = await this.profileRepository.findOne({
       where: { user: { id: req.user.userId } },
     });
@@ -110,7 +108,6 @@ export class ProfileService {
       throw new HttpException('Profile not found', HttpStatus.NOT_FOUND);
     }
 
-    // Update the profile
     Object.assign(profile, profileData);
     return this.profileRepository.save(profile);
   }

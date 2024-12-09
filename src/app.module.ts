@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config'; // Import the ConfigModule and ConfigService
 import { AuthModule } from './auth/auth.module';
 import { SmsModule } from './sms/sms.module';
+import { ProfileModule } from './profile/profile.module';
+import { InvitationModule } from './invitation/invitation.module';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { SmsModule } from './sms/sms.module';
         port: configService.get<number>('DB_PORT', 5432),
         username: configService.get<string>('DB_USERNAME', 'postgres'),
         password: configService.get<string>('DB_PASSWORD', 'Ayush@123'),
-        database: configService.get<string>('DB_NAME', 'Otter-DB'),
+        database: configService.get<string>('DB_NAME', 'Otter DB'),
         synchronize: true,
         autoLoadEntities: true, // Automatically load entities
       }),
@@ -27,6 +29,8 @@ import { SmsModule } from './sms/sms.module';
 
     AuthModule,
     SmsModule,
+    ProfileModule,
+    InvitationModule,
   ],
 })
 export class AppModule {}

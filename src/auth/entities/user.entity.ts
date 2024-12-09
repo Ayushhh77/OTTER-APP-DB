@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Profile } from '../../profile/entities/profile.entity';
+import { Invitation } from '../../invitation/entities/invitation.entity'; // Import Invitation entity
 
 @Entity('users')
 export class User {
@@ -22,4 +25,16 @@ export class User {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  // Relationship with Profile
+  @OneToMany(() => Profile, (profile) => profile.user)
+  profiles: Profile[];
+
+  // Relationship with Sent Invitations
+  @OneToMany(() => Invitation, (invitation) => invitation.sender)
+  sentInvitations: Invitation[];
+
+  // Relationship with Received Invitations
+  @OneToMany(() => Invitation, (invitation) => invitation.receiver)
+  receivedInvitations: Invitation[];
 }

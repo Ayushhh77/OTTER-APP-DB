@@ -7,6 +7,7 @@ import { User } from '../auth/entities/user.entity';
 import { OTP } from './entities/otp.entity';
 import { SmsModule } from '../sms/sms.module';
 import { ConfigModule } from '@nestjs/config';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     SmsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })

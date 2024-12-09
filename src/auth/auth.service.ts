@@ -21,7 +21,7 @@ export class AuthService {
   async sendOtp(phoneNumber: string): Promise<void> {
     if (!phoneNumber || !/^\+[1-9]\d{1,14}$/.test(phoneNumber)) {
       throw new HttpException(
-        'Invalid phone number format. Please provide a valid 10-digit phone number.',
+        'Invalid phone number format',
         HttpStatus.BAD_REQUEST,
       );
     }

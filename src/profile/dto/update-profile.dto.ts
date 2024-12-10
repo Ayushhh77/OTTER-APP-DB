@@ -1,6 +1,6 @@
 export class UpdateProfileDto {
   fullName?: string;
-  birthday?: Date;
+  dob?: Date;
   gender?: string;
   location?: string;
   email?: string;

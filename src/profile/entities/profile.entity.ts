@@ -21,7 +21,7 @@ export class Profile {
   fullName: string;
 
   @Column({ nullable: true })
-  birthday: Date;
+  dob: Date;
 
   @Column({ nullable: true })
   gender: string;
